@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier Management</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .supplier-page {
+            padding: 25px;
+        }
+
+        .supplier-form {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+            max-width: 750px;
+        }
+
+        .supplier-form input,
+        .supplier-form textarea {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .supplier-form textarea {
+            grid-column: 1 / -1;
+            resize: vertical;
+        }
+
+        .supplier-form button {
+            padding: 11px 18px;
+            border: none;
+            border-radius: 6px;
+            background: #1769aa;
+            color: white;
+            cursor: pointer;
+        }
+
+        .supplier-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+        }
+
+        .supplier-table th,
+        .supplier-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .supplier-table th {
+            background: #edf2f7;
+        }
+
+        .action-button {
+            padding: 6px 10px;
+            margin: 2px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .edit-button {
+            background: #e0efff;
+        }
+
+        .delete-button {
+            background: #ffe1e1;
+            color: #a40000;
+        }
+
+        #message {
+            margin-top: 12px;
+        }
+
+        @media (max-width: 650px) {
+            .supplier-form {
+                grid-template-columns: 1fr;
+            }
+
+            .supplier-form textarea {
+                grid-column: auto;
+            }
+
+            .table-container {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="supplier-page">
+
+        <h2>Supplier Management</h2>
+        <p>Add and manage raw material suppliers.</p>
+
+        <section class="content-panel">
+            <h3 id="formTitle">Add New Supplier</h3>
+
+            <form id="supplierForm" class="supplier-form">
+
+                <input
+                    type="text"
+                    id="supplier_name"
+                    placeholder="Supplier Name"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="contact_person"
+                    placeholder="Contact Person"
+                >
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Email Address"
+                >
+
+                <input
+                    type="text"
+                    id="phone"
+                    placeholder="Phone Number"
+                >
+
+                <textarea
+                    id="address"
+                    placeholder="Supplier Address"
+                    rows="3"
+                ></textarea>
+
+                <button type="submit" id="submitButton">
+                    Add Supplier
+                </button>
+
+                <button type="button" id="cancelButton"
+                    style="display:none; background:#777;">
+                    Cancel Edit
+                </button>
+
+            </form>
+
+            <p id="message"></p>
+        </section>
+
+        <section class="content-panel">
+            <h3>Supplier List</h3>
+
+            <div class="table-container">
+                <table class="supplier-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Supplier Name</th>
+                            <th>Contact Person</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="supplierTableBody">
+                        <tr>
+                            <td colspan="7">Loading suppliers...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <p><a href="../dashboard.html">← Back to Dashboard</a></p>
+
+    </div>
+
+    <script src="../js/suppliers.js"></script>
+</body>
+</html>

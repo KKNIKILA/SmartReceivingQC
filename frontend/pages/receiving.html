@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goods Receiving</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        .page { padding: 25px; }
+
+        .receiving-form {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .receiving-form input,
+        .receiving-form select,
+        .receiving-form textarea {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .receiving-form button {
+            padding: 11px;
+            border: none;
+            border-radius: 6px;
+            background: #1769aa;
+            color: white;
+            cursor: pointer;
+        }
+
+        .receipt-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 12px 0;
+        }
+
+        .receipt-item input {
+            margin: 7px 0;
+        }
+
+        .receipt-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            margin-top: 15px;
+        }
+
+        .receipt-table th,
+        .receipt-table td {
+            padding: 11px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .receipt-table th { background: #edf2f7; }
+
+        .table-container { overflow-x: auto; }
+
+        #message { margin-top: 12px; }
+
+        @media(max-width: 650px) {
+            .receiving-form { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+<div class="page">
+
+    <h2>Goods Receiving</h2>
+    <p>Record delivered raw materials and upload supplier COA documents.</p>
+
+    <section class="content-panel">
+        <h3>Record New Delivery</h3>
+
+        <form id="receivingForm" class="receiving-form">
+
+            <select id="po_id" required>
+                <option value="">Select Purchase Order</option>
+            </select>
+
+            <input type="date" id="received_date" required>
+
+            <input
+                type="text"
+                id="vehicle_number"
+                placeholder="Vehicle Number"
+                required
+            >
+
+            <textarea
+                id="remarks"
+                placeholder="Receiving remarks"
+                rows="2"
+            ></textarea>
+
+            <div style="grid-column:1/-1;">
+                <h4>Received Material Lots</h4>
+                <div id="itemsContainer">
+                    Select a purchase order first.
+                </div>
+            </div>
+
+            <button type="submit" style="grid-column:1/-1;">
+                Record Goods Receipt
+            </button>
+
+        </form>
+
+        <p id="message"></p>
+    </section>
+
+    <section class="content-panel">
+        <h3>Goods Receipt History</h3>
+
+        <div class="table-container">
+            <table class="receipt-table">
+                <thead>
+                    <tr>
+                        <th>GR Number</th>
+                        <th>PO Number</th>
+                        <th>Supplier</th>
+                        <th>Vehicle</th>
+                        <th>Received Date</th>
+                        <th>Lots</th>
+                        <th>Received By</th>
+                    </tr>
+                </thead>
+
+                <tbody id="receiptTableBody">
+                    <tr><td colspan="7">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <p><a href="../dashboard.html">← Back to Dashboard</a></p>
+
+</div>
+
+<script src="../js/receiving.js"></script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material Management</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        .material-page {
+            padding: 25px;
+        }
+
+        .material-form {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            max-width: 750px;
+        }
+
+        .material-form input,
+        .material-form textarea,
+        .spec-form input {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .material-form textarea {
+            grid-column: 1 / -1;
+        }
+
+        .material-form button,
+        .spec-form button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            background: #1769aa;
+            color: white;
+            cursor: pointer;
+        }
+
+        .material-table,
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 18px;
+            background: white;
+        }
+
+        .material-table th,
+        .material-table td,
+        .spec-table th,
+        .spec-table td {
+            padding: 11px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .material-table th,
+        .spec-table th {
+            background: #edf2f7;
+        }
+
+        .action-button {
+            padding: 6px 10px;
+            margin: 2px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .edit-button {
+            background: #e0efff;
+        }
+
+        .delete-button {
+            background: #ffe1e1;
+            color: #a40000;
+        }
+
+        .spec-button {
+            background: #e4f5e9;
+        }
+
+        .spec-form {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            max-width: 750px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        #message,
+        #specMessage {
+            margin-top: 12px;
+        }
+
+        @media (max-width: 650px) {
+            .material-form,
+            .spec-form {
+                grid-template-columns: 1fr;
+            }
+
+            .material-form textarea {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="material-page">
+
+        <h2>Material Management</h2>
+        <p>Manage raw materials and their quality specifications.</p>
+
+        <section class="content-panel">
+            <h3 id="formTitle">Add New Material</h3>
+
+            <form id="materialForm" class="material-form">
+
+                <input
+                    type="text"
+                    id="material_name"
+                    placeholder="Material Name"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="material_code"
+                    placeholder="Material Code"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="unit"
+                    placeholder="Unit (kg, litre, pieces)"
+                    required
+                >
+
+                <textarea
+                    id="description"
+                    placeholder="Material Description"
+                    rows="3"
+                ></textarea>
+
+                <button type="submit" id="submitButton">
+                    Add Material
+                </button>
+
+                <button
+                    type="button"
+                    id="cancelButton"
+                    style="display:none;background:#777;"
+                >
+                    Cancel Edit
+                </button>
+
+            </form>
+
+            <p id="message"></p>
+        </section>
+
+        <section class="content-panel">
+            <h3>Material List</h3>
+
+            <div class="table-container">
+                <table class="material-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Material Name</th>
+                            <th>Code</th>
+                            <th>Unit</th>
+                            <th>Description</th>
+                            <th>Specifications</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="materialTableBody">
+                        <tr>
+                            <td colspan="7">Loading materials...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="content-panel" id="specificationSection" style="display:none;">
+            <h3 id="specificationTitle">Quality Specifications</h3>
+
+            <form id="specificationForm" class="spec-form">
+
+                <input
+                    type="text"
+                    id="parameter_name"
+                    placeholder="Parameter Name"
+                    required
+                >
+
+                <input
+                    type="number"
+                    id="min_value"
+                    placeholder="Minimum Value"
+                    step="any"
+                    required
+                >
+
+                <input
+                    type="number"
+                    id="max_value"
+                    placeholder="Maximum Value"
+                    step="any"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="spec_unit"
+                    placeholder="Unit (%, MPa, etc.)"
+                    required
+                >
+
+                <button type="submit">Add Specification</button>
+
+            </form>
+
+            <p id="specMessage"></p>
+
+            <div class="table-container">
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Minimum</th>
+                            <th>Maximum</th>
+                            <th>Unit</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="specificationTableBody">
+                        <tr>
+                            <td colspan="5">Select a material.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <p><a href="../dashboard.html">← Back to Dashboard</a></p>
+
+    </div>
+
+    <script src="../js/materials.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart QC | Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app-layout">
+
+    <aside class="sidebar">
+        <h2>Smart QC</h2>
+
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="pages/users.html">Users</a>
+        <a href="pages/suppliers.html">Suppliers</a>
+        <a href="pages/materials.html">Materials</a>
+        <a href="pages/purchase-orders.html">Purchase Orders</a>
+        <a href="pages/receiving.html">Goods Receiving</a>
+        <a href="pages/quality.html">Quality Inspection</a>
+        <a href="pages/inventory.html">Inventory</a>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h1>Dashboard</h1>
+                <p>Smart Receiving and Quality Control System</p>
+            </div>
+
+            <div class="user-info">
+                <strong id="userName">Loading...</strong>
+                <p id="userRole"></p>
+                <button class="logout-button" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <section class="cards">
+
+            <div class="stat-card">
+                <p>Total Purchase Orders</p>
+                <h2 id="totalPO">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>Total Received Lots</p>
+                <h2 id="totalLots">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>Pending Inspections</p>
+                <h2 id="pendingInspections">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <p>Available Stock</p>
+                <h2 id="availableStock">0</h2>
+            </div>
+
+        </section>
+
+        <section class="content-panel">
+            <h2>Welcome to Smart QC</h2>
+            <p>
+                Monitor incoming raw materials, supplier deliveries,
+                quality inspections and available inventory from one place.
+            </p>
+        </section>
+
+        <section class="content-panel">
+            <h2>Material Lifecycle</h2>
+            <p>
+                Purchase Order → Goods Receiving → Quarantine →
+                Quality Inspection → Approval → Available Inventory →
+                Production Consumption
+            </p>
+        </section>
+
+    </main>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>

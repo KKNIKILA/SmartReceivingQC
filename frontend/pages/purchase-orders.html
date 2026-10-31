@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Order Management</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        .page { padding: 25px; }
+        .po-form {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            max-width: 850px;
+        }
+        .po-form input, .po-form select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        .po-form button, .add-item {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            background: #1769aa;
+            color: white;
+            cursor: pointer;
+        }
+        .item-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 10px;
+            margin: 12px 0;
+            align-items: center;
+        }
+        .item-row select, .item-row input {
+            min-width: 0;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .remove-item {
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            background: #ffe1e1;
+            color: #a40000;
+            cursor: pointer;
+        }
+        .po-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+        }
+        .po-table th, .po-table td {
+            border: 1px solid #ddd;
+            padding: 11px;
+            text-align: left;
+        }
+        .po-table th { background: #edf2f7; }
+        .table-container { overflow-x: auto; }
+        #message { margin-top: 12px; }
+        @media(max-width: 650px) {
+            .po-form { grid-template-columns: 1fr; }
+            .item-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+<div class="page">
+
+    <h2>Purchase Order Management</h2>
+    <p>Create purchase orders for raw materials.</p>
+
+    <section class="content-panel">
+        <h3>Create New Purchase Order</h3>
+
+        <form id="poForm" class="po-form">
+
+            <select id="supplier_id" required>
+                <option value="">Select Supplier</option>
+            </select>
+
+            <input type="date" id="order_date" required>
+
+            <input type="date" id="expected_delivery_date" required>
+
+            <div style="grid-column:1/-1;">
+                <h4>Purchase Order Items</h4>
+                <div id="itemsContainer"></div>
+                <button type="button" class="add-item" id="addItemButton">
+                    + Add Material
+                </button>
+            </div>
+
+            <button type="submit">Create Purchase Order</button>
+        </form>
+
+        <p id="message"></p>
+    </section>
+
+    <section class="content-panel">
+        <h3>Purchase Order List</h3>
+
+        <div class="table-container">
+            <table class="po-table">
+                <thead>
+                    <tr>
+                        <th>PO Number</th>
+                        <th>Supplier</th>
+                        <th>Order Date</th>
+                        <th>Expected Delivery</th>
+                        <th>Items</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody id="poTableBody">
+                    <tr><td colspan="7">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <p><a href="../dashboard.html">← Back to Dashboard</a></p>
+</div>
+
+<script src="../js/purchase-orders.js"></script>
+</body>
+</html>
